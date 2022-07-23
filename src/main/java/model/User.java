@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class User {
     private int id;
@@ -15,6 +16,27 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.amountOfMoney = amountOfMoney;
+    }
+
+    @Override
+    public String toString() {
+        return "ID: " + id +
+                "\nFirst Name: " + firstName+
+                "\nLast Name: " + lastName+
+                "\nAmount of money: " + amountOfMoney + "\n\n";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && firstName.equals(user.firstName) && lastName.equals(user.lastName) && amountOfMoney.equals(user.amountOfMoney);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, amountOfMoney);
     }
 
     // TODO: What getters do we need?
