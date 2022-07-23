@@ -40,4 +40,8 @@ public class User {
     }
 
     // TODO: What getters do we need?
+
+    public int getId() {
+        return id;
+    }
 }

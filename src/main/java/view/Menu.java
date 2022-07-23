@@ -5,6 +5,7 @@ import logic.UserStorageCollection;
 import model.Product;
 import model.User;
 
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -52,8 +53,8 @@ public class Menu {
     }
 
     public void displayUsers() {
-        Set<User> all = userStorage.getAll();
-        for (User u : all) {
+        Map<Integer, User> all = userStorage.getAll();
+        for (User u : all.values()) {
             System.out.println(u);
         }
 
@@ -61,8 +62,8 @@ public class Menu {
     }
 
     public void displayProducts() {
-        Set<Product> all = productStorage.getAll();
-        for (Product p : all) {
+        Map<Integer, Product> all = productStorage.getAll();
+        for (Product p : all.values()) {
             System.out.println(p);
         }
 
@@ -70,7 +71,21 @@ public class Menu {
     }
 
     public void buyProduct() {
+        System.out.print("Please, enter <user_id> <product_id>: ");
 
+        // TODO: Add validation
+        try (Scanner sc = new Scanner(System.in)) {
+            int userId = sc.nextInt();
+            int productId = sc.nextInt();
+
+            try {
+                userStorage.buy(userId, productId);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+        printOptions();
     }
 
     public void displayProductsByUser() {

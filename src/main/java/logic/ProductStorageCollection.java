@@ -3,19 +3,24 @@ package logic;
 import model.Product;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class ProductStorageCollection {
 
-    // We use the Set to store unique objects in random order
-    private Set<Product> products = new HashSet<>();
+    // We use the Map to store objects and have quick access by id
+    private Map<Integer, Product> products = new HashMap<>();
     private static ProductStorageCollection productStorageCollection;
 
     private ProductStorageCollection() {
-        products.add(new Product(1, "Ubergun", new BigDecimal("750.95")));
-        products.add(new Product(2, "ASCII Portrait", new BigDecimal("193.66")));
-        products.add(new Product(3, "Mars rover", new BigDecimal("1000000000")));
+        Product prod1 = new Product(1, "Ubergun", new BigDecimal("750.95"));
+        products.putIfAbsent(prod1.getId(), prod1);
+        Product prod2 = new Product(2, "ASCII Portrait", new BigDecimal("193.66"));
+        products.putIfAbsent(prod2.getId(), prod2);
+        Product prod3 = new Product(3, "Mars rover", new BigDecimal("1000000000"));
+        products.putIfAbsent(prod3.getId(), prod3);
     }
 
     // The Singleton because I want to have only one instance of product set created
@@ -27,7 +32,7 @@ public class ProductStorageCollection {
         return productStorageCollection;
     }
 
-    public Set<Product> getAll() {
+    public Map<Integer, Product> getAll() {
         return products;
     }
 }
