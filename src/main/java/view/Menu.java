@@ -1,17 +1,19 @@
 package view;
 
+import logic.NotEnoughMoneyException;
 import logic.ProductStorageCollection;
 import logic.UserStorageCollection;
 import model.Product;
 import model.User;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Menu {
     private UserStorageCollection userStorage;
     private ProductStorageCollection productStorage;
+    private Scanner sc = new Scanner(System.in);
 
     public Menu() {
         userStorage = UserStorageCollection.getUserStorageCollection();
@@ -24,31 +26,33 @@ public class Menu {
         sb.append("2. Display list of all products\n");
         sb.append("3. Buy product\n");
         sb.append("4. Display list of user products by user id\n");
-        sb.append("5. Display list of users that bought product by product id\n\n");
+        sb.append("5. Display list of users that bought product by product id\n");
+        sb.append("6. Quite\n\n");
 
         System.out.println(sb);
 
         System.out.print("Input: ");
 
-        try (Scanner sc = new Scanner(System.in)) {
-            int input = sc.nextInt();
-            switch(input) {
-                case 1:
-                    displayUsers();
-                    break;
-                case 2:
-                    displayProducts();
-                    break;
-                case 3:
-                    buyProduct();
-                    break;
-                case 4:
-                    displayProductsByUser();
-                    break;
-                case 5:
-                    displayUsersByproduct();
-                    break;
-            }
+        int input = sc.nextInt();
+        switch (input) {
+            case 1:
+                displayUsers();
+                break;
+            case 2:
+                displayProducts();
+                break;
+            case 3:
+                buyProduct();
+                break;
+            case 4:
+                displayProductsByUser();
+                break;
+            case 5:
+                displayUsersByProduct();
+                break;
+            case 6:
+                sc.close();
+                System.exit(1);
         }
     }
 
@@ -73,26 +77,43 @@ public class Menu {
     public void buyProduct() {
         System.out.print("Please, enter <user_id> <product_id>: ");
 
-        // TODO: Add validation
-        try (Scanner sc = new Scanner(System.in)) {
-            int userId = sc.nextInt();
-            int productId = sc.nextInt();
-
-            try {
-                userStorage.buy(userId, productId);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
+        int userId = sc.nextInt();
+        int productId = sc.nextInt();
+        try {
+            userStorage.buy(userId, productId);
+            System.out.println("INFO: Successful purchase");
+        } catch (NotEnoughMoneyException e) {
+            System.out.println(e.getMessage());
         }
 
         printOptions();
     }
 
     public void displayProductsByUser() {
+        System.out.print("Please, enter <user_id>: ");
 
+        int userId = sc.nextInt();
+        User user = userStorage.getAll().get(userId);
+        List<Map<Integer, Product>> productsByUserId = userStorage.getProductsByUserId(userId);
+        if (user != null && productsByUserId != null) {
+            System.out.println("The products of user " + user.getName());
+            for (Map<Integer, Product> idprMap : productsByUserId) {
+                for (Product pr : idprMap.values()) {
+                    System.out.println(pr);
+                }
+            }
+        }
+
+        printOptions();
     }
 
-    public void displayUsersByproduct() {
+    public void displayUsersByProduct() {
+        System.out.print("Please, enter <product_id>: ");
 
+        int productId = sc.nextInt();
+        Product product = productStorage.getAll().get(productId);
+        if (product != null) {
+            List<User> usersByProductId = userStorage.getUsersByProductId(productId);
+        }
     }
 }

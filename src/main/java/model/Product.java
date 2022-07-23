@@ -41,4 +41,8 @@ public class Product {
     public int getId() {
         return id;
     }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }

@@ -31,7 +31,8 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id == user.id && firstName.equals(user.firstName) && lastName.equals(user.lastName) && amountOfMoney.equals(user.amountOfMoney);
+        return id == user.id && firstName.equals(user.firstName) && lastName.equals(user.lastName)
+                && amountOfMoney.equals(user.amountOfMoney);
     }
 
     @Override
@@ -43,5 +44,17 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public BigDecimal getAmountOfMoney() {
+        return amountOfMoney;
+    }
+
+    public void setAmountOfMoney(BigDecimal amountOfMoney) {
+        this.amountOfMoney = amountOfMoney;
+    }
+
+    public String getName() {
+        return firstName + " " + lastName;
     }
 }
