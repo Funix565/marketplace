@@ -77,6 +77,12 @@ public class UserStorageCollection {
         userProducts.putIfAbsent(user, products);
     }
 
+    public ArrayList<Product> getProductsByUserId(int userId) {
+        User user = users.get(userId);
+        ArrayList<Product> products = userProducts.get(user);
+        return products;
+    }
+
     public List<User> getUsersByProductId(int productId) {
         return null;
     }

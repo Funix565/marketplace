@@ -6,6 +6,7 @@ import logic.UserStorageCollection;
 import model.Product;
 import model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -92,21 +93,10 @@ public class Menu {
     public void displayProductsByUser() {
         System.out.print("Please, enter <user_id>: ");
         int userId = sc.nextInt();
-        User user = userStorage.getAll().get(userId);
-
-
-//
-//
-//
-//        List<Map<Integer, Product>> productsByUserId = userStorage.getProductsByUserId(userId);
-//        if (user != null && productsByUserId != null) {
-//            System.out.println("The products of user " + user.getName());
-//            for (Map<Integer, Product> idprMap : productsByUserId) {
-//                for (Product pr : idprMap.values()) {
-//                    System.out.println(pr);
-//                }
-//            }
-//        }
+        ArrayList<Product> productsByUserId = userStorage.getProductsByUserId(userId);
+        for (Product p : productsByUserId) {
+            System.out.println(p);
+        }
 
         printOptions();
     }
