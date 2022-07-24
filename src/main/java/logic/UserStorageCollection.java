@@ -84,6 +84,14 @@ public class UserStorageCollection {
     }
 
     public List<User> getUsersByProductId(int productId) {
-        return null;
+        List<User> result = new ArrayList<>();
+        Product product = ProductStorageCollection.getProductStorageCollection().getAll().get(productId);
+        for (User u : userProducts.keySet()) {
+            if (userProducts.get(u).contains(product)) {
+                result.add(u);
+            }
+        }
+
+        return result;
     }
 }

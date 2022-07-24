@@ -103,11 +103,12 @@ public class Menu {
 
     public void displayUsersByProduct() {
         System.out.print("Please, enter <product_id>: ");
-
         int productId = sc.nextInt();
-        Product product = productStorage.getAll().get(productId);
-        if (product != null) {
-            List<User> usersByProductId = userStorage.getUsersByProductId(productId);
+        List<User> usersByProductId = userStorage.getUsersByProductId(productId);
+        for (User u : usersByProductId) {
+            System.out.println(u);
         }
+
+        printOptions();
     }
 }
