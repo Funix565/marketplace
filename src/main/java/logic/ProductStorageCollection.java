@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ProductStorageCollection {
 
-    // We use the Map to store objects and have quick access by id
+    // We use Map to store objects and have quick access by id
     private Map<Integer, Product> products = new HashMap<>();
     private static ProductStorageCollection productStorageCollection;
 
@@ -21,7 +21,7 @@ public class ProductStorageCollection {
         products.putIfAbsent(prod3.getId(), prod3);
     }
 
-    // The Singleton because I want to have only one instance of product set created
+    // The Singleton because I want to have only one instance of product map created
     public static ProductStorageCollection getProductStorageCollection() {
         if (productStorageCollection == null) {
             productStorageCollection = new ProductStorageCollection();

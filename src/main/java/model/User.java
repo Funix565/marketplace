@@ -31,8 +31,9 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
+        // It is better to use compareTo with BigDecimal
         return id == user.id && firstName.equals(user.firstName) && lastName.equals(user.lastName)
-                && amountOfMoney.equals(user.amountOfMoney);
+                && amountOfMoney.compareTo(user.amountOfMoney) == 0;
     }
 
     @Override

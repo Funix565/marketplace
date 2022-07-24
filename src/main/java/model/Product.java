@@ -28,7 +28,8 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && name.equals(product.name) && price.equals(product.price);
+        // It is better to use compareTo with BigDecimal
+        return id == product.id && name.equals(product.name) && price.compareTo(product.price) == 0;
     }
 
     @Override

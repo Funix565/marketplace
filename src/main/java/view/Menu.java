@@ -91,18 +91,22 @@ public class Menu {
 
     public void displayProductsByUser() {
         System.out.print("Please, enter <user_id>: ");
-
         int userId = sc.nextInt();
         User user = userStorage.getAll().get(userId);
-        List<Map<Integer, Product>> productsByUserId = userStorage.getProductsByUserId(userId);
-        if (user != null && productsByUserId != null) {
-            System.out.println("The products of user " + user.getName());
-            for (Map<Integer, Product> idprMap : productsByUserId) {
-                for (Product pr : idprMap.values()) {
-                    System.out.println(pr);
-                }
-            }
-        }
+
+
+//
+//
+//
+//        List<Map<Integer, Product>> productsByUserId = userStorage.getProductsByUserId(userId);
+//        if (user != null && productsByUserId != null) {
+//            System.out.println("The products of user " + user.getName());
+//            for (Map<Integer, Product> idprMap : productsByUserId) {
+//                for (Product pr : idprMap.values()) {
+//                    System.out.println(pr);
+//                }
+//            }
+//        }
 
         printOptions();
     }
